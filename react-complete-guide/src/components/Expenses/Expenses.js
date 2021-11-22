@@ -10,22 +10,16 @@ import './Expenses.css';
 const Expenses = props => {
 
   const [filteredYear, setFilteredYear] = useState('2021');
-  const [filteredExpenses, setFilteredExpenses] = useState(props.items);
 
+  const filteredExpenses = props.items.filter((expense) => {
+    if(!filteredYear){
+        return true;
+    }
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+  
   const filterSelectedHandler = selectedYear => {
-
-      console.log(!selectedYear);
-
       setFilteredYear(selectedYear);
-
-      if(!selectedYear){
-        setFilteredExpenses(props.items);
-        return ;
-      }
-      
-      setFilteredExpenses(props.items.filter( (expense) => {
-        return expense.date.getFullYear().toString() === selectedYear;
-      }));
   }
 
 
