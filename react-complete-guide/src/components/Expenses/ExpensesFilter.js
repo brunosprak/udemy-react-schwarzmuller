@@ -5,7 +5,7 @@ import './ExpensesFilter.css';
 function ExpensesFilter(props) {
 
     function onChangeHandler(event){
-        props.onFilterSelected(event.target.value);
+        props.onChangeFilter(event.target.value);
     }
 
     return (
