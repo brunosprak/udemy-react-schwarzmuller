@@ -1,0 +1,9 @@
+.form-controls, .form-actions {
+    font-weight: bold;
+    padding: 5px;
+}
+
+.form-controls input {
+    display: block;
+    width: 100%;
+}

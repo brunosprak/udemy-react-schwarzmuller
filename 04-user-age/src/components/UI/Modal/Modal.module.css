@@ -1,0 +1,34 @@
+.backdrop {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+   background-color:  rgb(86, 105, 122);
+   z-index: 10;
+   margin: auto 0 ;
+}
+
+.modal {
+    position: fixed;
+    top: 30vh;
+    left:10%;
+    width:80%;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.modal .title, .modal .content {
+    padding: 10px;
+}
+
+.modal .title {
+    color: white;
+    font-weight: bold;
+    background-color: purple;
+
+}
+
+.modal .content {
+    background-color: white;
+}
