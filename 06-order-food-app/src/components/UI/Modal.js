@@ -1,4 +1,4 @@
-import React, { useImperativeHandle} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import classes from './Modal.module.css';
