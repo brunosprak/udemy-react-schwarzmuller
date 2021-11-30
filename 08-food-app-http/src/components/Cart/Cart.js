@@ -17,7 +17,7 @@ const Cart = (props) => {
 
     console.log(cartCtx);
 
-    if(cartCtx.items.length === 0 ){
+    if (cartCtx.items.length === 0) {
       setIsCheckout(false);
     }
   };
@@ -45,6 +45,13 @@ const Cart = (props) => {
     setIsCheckout(true);
   };
 
+  const confirmOrderHandler = (data) => {
+    fetch(
+      'https://react-food-http-ca90a-default-rtdb.firebaseio.com/orders.json',
+      { method: 'POST', body: JSON.stringify({user: data, orderedItems: cartCtx.items} ) }
+    );
+  };
+
   return (
     <Modal onClose={props.onClose}>
       {cartItems}
@@ -52,11 +59,13 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isCheckout && <Checkout />}
+      {isCheckout && <Checkout onConfirm={confirmOrderHandler} />}
       <div className={classes.actions}>
-        {!isCheckout && <button className={classes['button--alt']} onClick={props.onClose}>
-          Close
-        </button>}
+        {!isCheckout && (
+          <button className={classes['button--alt']} onClick={props.onClose}>
+            Close
+          </button>
+        )}
         {hasItems && !isCheckout && (
           <button className={classes.button} onClick={orderHandler}>
             Order

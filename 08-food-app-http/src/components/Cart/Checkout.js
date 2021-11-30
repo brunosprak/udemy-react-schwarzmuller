@@ -44,8 +44,12 @@ const Checkout = (props) => {
     if(!formIsValid){
       return;
     }
-
-
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      postal: enteredPostal,
+      city: enteredCity,
+    });
   };
 
   return (
@@ -71,10 +75,10 @@ const Checkout = (props) => {
         {!formInputsValidity.city && <p>Invalid</p>}
       </div>
       <div className={classes.actions}>
-        <button type='button' onClick={props.onCancel}>
+        <button type='button' >
           Cancel
         </button>
-        <button className={classes.submit}>Confirm</button>
+        <button className={classes.submit} onClick={props.onConfirm()}>Confirm</button>
       </div>
     </form>
   );
