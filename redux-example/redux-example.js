@@ -6,6 +6,13 @@ const counterReducer = (state =  {counter: 0}, action) => {
 
 const store = redux.createStore(counterReducer);
 
+const subscriber = () => {
+    console.log(store.getState());
+};
+
+store.subscribe(subscriber);
+
 console.log(store.getState());
 
-
+store.dispatch({type:'inc'});
+store.dispatch({type:'inc'});
