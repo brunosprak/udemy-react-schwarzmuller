@@ -6,12 +6,12 @@ const Counter = () => {
   const counter = useSelector(state => state.counter);
   const dispatch = useDispatch();
   
-  const incrementHandler  = () => {
-    dispatch({ type: 'INC'});
+  const incrementHandler  = (step = 1) => {
+    dispatch({ type: 'INC', step: step});
   }
 
-  const decrementHandler  = () => {
-    dispatch({ type: 'DEC'});
+  const decrementHandler  = (step = 1)  => {
+    dispatch({ type: 'DEC', step: step});
   }
 
   const toggleCounterHandler = () => {};
@@ -21,7 +21,8 @@ const Counter = () => {
       <h1>Redux Counter</h1>
       <div className={classes.value}>{counter}</div>
       <div>
-        <button onClick={incrementHandler}>Increment</button>
+      <button onClick={incrementHandler.bind(null, 1)}>Increment</button>
+      <button onClick={incrementHandler.bind(null, 5)}>Increment by 5</button>
         <button onClick={decrementHandler}>Decrement</button>
       </div>
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
