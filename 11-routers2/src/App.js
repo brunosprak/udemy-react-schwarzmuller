@@ -3,6 +3,7 @@ import QuoteAddPage from './pages/AddQuote';
 import QuoteDetailPage from './pages/QuoteDetail';
 import Layout from './components/layout/Layout';
 import AllQuotes from './pages/AllQuotes';
+import NotFound from './pages/NotFound';
 
 
 
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path='/quotes/:id'>
             <QuoteDetailPage />
+          </Route>
+          <Route path='*'>
+            <NotFound />
           </Route>
         </Switch>
       </main>
