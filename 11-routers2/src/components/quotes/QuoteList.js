@@ -16,13 +16,19 @@ const sortQuotes = (quotes, ascending) => {
 const QuoteList = (props) => {
   const history = useHistory();
   const location = useLocation();
+
   const searchParams = new URLSearchParams(location.search);
   const isSortingAsc = searchParams.get('sort') === 'asc';
 
   const sortedQuotes = sortQuotes(props.quotes, isSortingAsc);
 
   const changeSortingHandler = () => {
-    history.push('/quotes?sort=' + (isSortingAsc ? 'desc' : 'asc'));
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${(isSortingAsc ? 'desc' : 'asc')}`
+      
+    });
+    //history.push(`${location.pathname}?sort=${isSortingAsc ? 'desc' : 'asc'}`);
   };
 
   return (
