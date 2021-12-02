@@ -1,7 +1,6 @@
 import { Route, useParams, Link, useRouteMatch } from 'react-router-dom';
 import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
-import NoQuotesFound from '../components/quotes/NoQuotesFound';
 import { getSingleQuote } from '../lib/api';
 import useHttp from '../hooks/use-http';
 import { useEffect } from 'react';
@@ -19,7 +18,7 @@ const QuoteDetailPage = () => {
   const { id } = params;
 
   useEffect(() => {
-    sendRequest(params.id);
+    sendRequest(id);
   }, [sendRequest, id]);
 
   if (status === 'pending') {
