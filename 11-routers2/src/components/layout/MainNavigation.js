@@ -4,14 +4,14 @@ import classes from './MainNavigation.module.css';
 const MainNavigation = () => {
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>Great quotes</div>
+      <div className={classes.logo} >Great quotes</div>
       <nav className={classes.nav}>
         <ul>
           <li>
-            <NavLink to='/quotes'>All Quotes</NavLink>
+            <NavLink to='/quotes' activeClassName={classes.active}>All Quotes</NavLink>
           </li>
           <li>
-            <NavLink to='/quotes/add'>New Quote</NavLink>
+            <NavLink to='/quotes/add' activeClassName={classes.active}>New Quote</NavLink>
           </li>
         </ul>
       </nav>
