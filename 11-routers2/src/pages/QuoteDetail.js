@@ -2,34 +2,59 @@ import { Route, useParams, Link, useRouteMatch } from 'react-router-dom';
 import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
 import NoQuotesFound from '../components/quotes/NoQuotesFound';
-
-const DUMMY_QUOTES = [
-  { id: 'q1', author: 'Author 1', text: 'text 1' },
-  { id: 'q2', author: 'Author 2', text: 'text 2' },
-];
+import { getSingleQuote } from '../lib/api';
+import useHttp from '../hooks/use-http';
+import { useEffect } from 'react';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 const QuoteDetailPage = () => {
   const params = useParams();
   const match = useRouteMatch();
+  const {
+    sendRequest,
+    status,
+    data: loadedQuote, error
+  } = useHttp(getSingleQuote, true);
 
-  const quote = DUMMY_QUOTES.find((quote) => quote.id === params.id);
+  const { id } = params;
 
-  if (!quote) {
-    return <NoQuotesFound />;
+  useEffect(() => {
+    sendRequest(params.id);
+  }, [sendRequest, id]);
+
+  if (status === 'pending') {
+    return (
+      <div className='centered'>
+        <LoadingSpinner />
+      </div>
+    );
   }
 
-  const showCommentsHandler = () => {
+  
+  if(error) {
+    return <p className='centered focused'>{error}</p>;
+  }
+  
+  if (!loadedQuote.text) {
+    return  <p className='centered focused'>No quote found!</p>;
+  }
 
-  };
+  const showCommentsHandler = () => {};
 
   return (
     <>
-      <HighlightedQuote text={quote.text} author={quote.author} id={quote.id} />
-      
+      <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} id={loadedQuote.id} />
+
       <Route path={`${match.path}`} exact>
-       <div className="centered">
-         <Link to={`${match.url}comments`} className='btn--flat' onClick={showCommentsHandler}>Load comments</Link>
-       </div>
+        <div className='centered'>
+          <Link
+            to={`${match.url}comments`}
+            className='btn--flat'
+            onClick={showCommentsHandler}
+          >
+            Load comments
+          </Link>
+        </div>
       </Route>
       <Route path={`${match.path}/comments`}>
         <Comments />
