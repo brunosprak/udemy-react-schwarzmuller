@@ -28,7 +28,7 @@ const QuoteDetailPage = () => {
       
       <Route path={`${match.path}`} exact>
        <div className="centered">
-         <Link to={`${match.path}/comments`} className='btn--flat' onClick={showCommentsHandler}>Load comments</Link>
+         <Link to={`${match.url}comments`} className='btn--flat' onClick={showCommentsHandler}>Load comments</Link>
        </div>
       </Route>
       <Route path={`${match.path}/comments`}>
