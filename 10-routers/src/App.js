@@ -3,7 +3,7 @@ import Header from './components/Header';
 import ProductDetail from './pages/ProductDetail';
 import Products from './pages/Products';
 import Welcome from './pages/Welcome';
-import { Switch } from 'react-router';
+import { Switch, Redirect } from 'react-router-dom';
 
 function App() {
   return (
@@ -11,6 +11,9 @@ function App() {
       <Header />
       <main>
         <Switch>
+          <Route path='/' exact>
+            <Redirect to='/welcome' />
+          </Route>
           <Route path='/welcome'>
             <Welcome />
           </Route>
